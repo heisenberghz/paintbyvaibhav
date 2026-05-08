@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paint Web App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="paint-window">
+    <header class="window-chrome">
+      <div class="window-brand">
+        <div class="paint-logo">P</div>
+        <div>
+          <p class="micro-label">Web app</p>
+          <h1>Paint</h1>
+        </div>
+      </div>
+      <div class="window-actions">
+        <span class="chrome-pill">Classic layout</span>
+        <span class="chrome-pill">Modern polish</span>
+        <span class="chrome-pill">Runs locally</span>
+      </div>
+    </header>
+
+    <nav class="tab-strip" aria-label="Ribbon tabs">
+      <button class="tab-chip active" type="button">Home</button>
+      <button class="tab-chip" type="button">View</button>
+    </nav>
+
+    <section class="ribbon" aria-label="Paint toolbar">
+      <div class="ribbon-group ribbon-group-tools">
+        <div class="group-header">
+          <p class="group-title">Clipboard</p>
+        </div>
+        <div class="command-column">
+          <button id="downloadButton" class="hero-command" type="button">Save PNG</button>
+          <div class="stack-actions">
+            <button id="undoButton" class="command-button" type="button">Undo</button>
+            <button id="redoButton" class="command-button" type="button">Redo</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ribbon-group">
+        <div class="group-header">
+          <p class="group-title">Tools</p>
+        </div>
+        <div class="tool-grid">
+          <button class="tool-button active" data-tool="pencil" type="button">Pencil</button>
+          <button class="tool-button" data-tool="brush" type="button">Brush</button>
+          <button class="tool-button" data-tool="eraser" type="button">Eraser</button>
+          <button class="tool-button" data-tool="spray" type="button">Airbrush</button>
+          <button class="tool-button" data-tool="fill" type="button">Fill</button>
+          <button class="tool-button" data-tool="eyedropper" type="button">Pick Color</button>
+        </div>
+      </div>
+
+      <div class="ribbon-group">
+        <div class="group-header">
+          <p class="group-title">Shapes</p>
+        </div>
+        <div class="tool-grid">
+          <button class="tool-button" data-tool="line" type="button">Line</button>
+          <button class="tool-button" data-tool="rectangle" type="button">Rectangle</button>
+          <button class="tool-button" data-tool="rounded-rectangle" type="button">Round Rect</button>
+          <button class="tool-button" data-tool="circle" type="button">Ellipse</button>
+          <button class="tool-button" data-tool="triangle" type="button">Triangle</button>
+          <button class="tool-button" data-tool="arrow" type="button">Arrow</button>
+        </div>
+      </div>
+
+      <div class="ribbon-group ribbon-group-wide">
+        <div class="group-header">
+          <p class="group-title">Colors</p>
+        </div>
+        <div class="color-layout">
+          <div class="color-wells">
+            <label class="color-card">
+              <span>Color 1</span>
+              <input id="primaryColorPicker" type="color" value="#111111">
+            </label>
+            <label class="color-card">
+              <span>Color 2</span>
+              <input id="secondaryColorPicker" type="color" value="#ffffff">
+            </label>
+            <button id="swapColorsButton" class="command-button" type="button">Swap</button>
+          </div>
+          <div class="swatches" aria-label="Quick colors">
+            <button class="swatch active" type="button" data-color="#111111" style="--swatch:#111111;"></button>
+            <button class="swatch" type="button" data-color="#7f7f7f" style="--swatch:#7f7f7f;"></button>
+            <button class="swatch" type="button" data-color="#880015" style="--swatch:#880015;"></button>
+            <button class="swatch" type="button" data-color="#ed1c24" style="--swatch:#ed1c24;"></button>
+            <button class="swatch" type="button" data-color="#ff7f27" style="--swatch:#ff7f27;"></button>
+            <button class="swatch" type="button" data-color="#fff200" style="--swatch:#fff200;"></button>
+            <button class="swatch" type="button" data-color="#22b14c" style="--swatch:#22b14c;"></button>
+            <button class="swatch" type="button" data-color="#00a2e8" style="--swatch:#00a2e8;"></button>
+            <button class="swatch" type="button" data-color="#3f48cc" style="--swatch:#3f48cc;"></button>
+            <button class="swatch" type="button" data-color="#a349a4" style="--swatch:#a349a4;"></button>
+            <button class="swatch" type="button" data-color="#b97a57" style="--swatch:#b97a57;"></button>
+            <button class="swatch" type="button" data-color="#ffffff" style="--swatch:#ffffff;"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ribbon-group">
+        <div class="group-header">
+          <p class="group-title">Brushes</p>
+        </div>
+        <div class="size-block">
+          <label class="inline-field" for="sizeSlider">
+            <span>Size</span>
+            <input id="sizeSlider" type="range" min="1" max="72" value="6">
+          </label>
+          <div class="size-presets" aria-label="Brush size presets">
+            <button class="size-chip active" data-size="2" type="button">Thin</button>
+            <button class="size-chip" data-size="6" type="button">Normal</button>
+            <button class="size-chip" data-size="14" type="button">Bold</button>
+            <button class="size-chip" data-size="28" type="button">Marker</button>
+          </div>
+          <div class="option-row">
+            <span id="sizeValue">6 px</span>
+            <label class="check-field">
+              <input id="fillShapeToggle" type="checkbox">
+              <span>Fill shapes</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="ribbon-group">
+        <div class="group-header">
+          <p class="group-title">Canvas</p>
+        </div>
+        <div class="command-column">
+          <button id="clearButton" class="command-button warning" type="button">Clear canvas</button>
+          <p class="helper-text">Tip: right click uses Color 2 for lines, fills, and shapes.</p>
+        </div>
+      </div>
+    </section>
+
+    <main class="workspace">
+      <aside class="sidebar">
+        <section class="sidebar-card">
+          <p class="panel-title">Selected Tool</p>
+          <h2 id="toolName">Pencil</h2>
+          <p id="toolHint" class="sidebar-copy">Fine line drawing for precise sketching.</p>
+        </section>
+
+        <section class="sidebar-card">
+          <p class="panel-title">Current Colors</p>
+          <div class="live-swatches">
+            <div class="live-color">
+              <span>Color 1</span>
+              <strong id="primaryColorLabel">#111111</strong>
+            </div>
+            <div class="live-color secondary">
+              <span>Color 2</span>
+              <strong id="secondaryColorLabel">#FFFFFF</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-card">
+          <p class="panel-title">Shortcuts</p>
+          <ul class="shortcut-list">
+            <li><span>Undo</span><strong>Ctrl+Z</strong></li>
+            <li><span>Redo</span><strong>Ctrl+Y</strong></li>
+            <li><span>Save</span><strong>Ctrl+S</strong></li>
+            <li><span>Swap colors</span><strong>X</strong></li>
+          </ul>
+        </section>
+      </aside>
+
+      <section class="canvas-panel">
+        <div class="workspace-top">
+          <div>
+            <p class="micro-label">Home</p>
+            <h2>Paint-style canvas</h2>
+          </div>
+          <p id="statusText" class="status-text">Pencil ready - 6px</p>
+        </div>
+
+        <div class="canvas-frame">
+          <div class="canvas-toolbar">
+            <span>100%</span>
+            <span>1280 x 800</span>
+          </div>
+          <div class="canvas-stage">
+            <div class="canvas-board">
+              <canvas id="paintCanvas" width="1280" height="800" aria-label="Paint canvas"></canvas>
+              <canvas id="previewCanvas" width="1280" height="800" aria-hidden="true"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="statusbar">
+      <span id="footerTool">Tool: Pencil</span>
+      <span id="footerColors">Colors: #111111 / #FFFFFF</span>
+      <span id="footerHint">Ready to draw</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
